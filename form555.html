@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Forms Exercise</title>
+    <style type="text/css">
+        .set{
+            align=center;
+        }
+    </style>
+
+    <script type="text/javascript">
+        
+var stateObject = {
+    "Country 1": {
+        "C1": ["c11", "c12"],
+        "C2": ["c21", "c22"]
+    },
+    "Country 2": {
+        "D1": ["d11", "d12"],
+        "D2": ["d21", "d22"]
+    }
+}
+window.onload = function () {
+    var countySel = document.getElementById("countySel"),
+        stateSel = document.getElementById("stateSel"),
+        districtSel = document.getElementById("districtSel");
+    for (var country in stateObject) {
+        countySel.options[countySel.options.length] = new Option(country, country);
+    }
+    countySel.onchange = function () {
+        stateSel.length = 1; // remove all options bar first
+        districtSel.length = 1; // remove all options bar first
+        if (this.selectedIndex < 1) return; // done   
+        for (var state in stateObject[this.value]) {
+            stateSel.options[stateSel.options.length] = new Option(state, state);
+        }
+    }
+    countySel.onchange(); // reset in case page is reloaded
+    stateSel.onchange = function () {
+        districtSel.length = 1; // remove all options bar first
+        if (this.selectedIndex < 1) return; // done   
+        var district = stateObject[countySel.value][this.value];
+        for (var i = 0; i < district.length; i++) {
+            districtSel.options[districtSel.options.length] = new Option(district[i], district[i]);
+        }
+    }
+}</script>    
+</head>
+
+<body>
+    <h1 align="left">Register</h1>
+  <div class="set"><form align="left">
+	<div>
+    <label for="first name">First Name:</label>
+	<input id="first name" type="text" name="First Name" placeholder="first name" required ></div><br>
+    <div>
+	<label for="last name">last Name:</label>
+	<input id="last name" type="text" name="last Name" placeholder="last name" required>
+    </div><br>
+    <div>
+	<label for="gender">Male:</label>
+	<input id="gender" type="radio" name="Gender" value="Male:" required >&emsp;
+
+	<label for="gender">Female:</label>
+	<input id="gender" type="radio" name="Gender" value="Female" required>&emsp;
+
+	<label for="gender">Other:</label>
+	<input id="gender" type="radio" name="Gender" value="Other" required>&emsp;
+    </div><br>
+    <div>  
+    <label for="Email">Email:</label>
+    <input type="Email" name="Email" name="Email:" placeholder="your email" required></div><br>
+<div>
+    <label for="Password">Password:</label>
+    <input type="password" id="psw" name="psw" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required></div><br>
+    <div>
+        Date:<input type="Date" required></div><br>
+    Birthday:
+    <select name="month:">
+    <option selected hidden>Month:</option>
+    <option>Jan</option>
+    <option>Feb</option>
+    <option>Mar</option>
+    </select>
+    <select name="Date">
+    <option>Date:</option>
+    <option>01</option>
+    <option>02</option>
+    <option>03</option>
+    </select>
+    <select name="Year">
+    <option>Year:</option>
+    <option>1995</option>
+    <option>1996</option>
+    <option>1997</option>
+    </select>
+    </div><br>
+
+ Select Country: <select name="state" id="countySel" size="1">
+        <option value="" selected="selected">Select Country</option>
+    </select>
+    <br>
+    <br>
+    Select State: <select name="countrya" id="stateSel" size="1">
+        <option value="" selected="selected">Please select Country first</option>
+    </select>
+    <br>
+    <br>
+    Select District: <select name="district" id="districtSel" size="1">
+        <option value="" selected="selected">Please select State first</option>
+    </select><br>
+    
+
+    <br>
+
+
+
+
+
+    <div>
+	<label>I agree to the terms and consitions
+    <input type="checkbox" name="agreed" required></label>
+    </div>
+    <br>
+    <input type="submit" align="right">
+    </div>
+</form>
+</div>
+</body>
+</html>
